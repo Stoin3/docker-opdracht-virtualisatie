@@ -1,6 +1,6 @@
-# Voornaam: Jouwvoornaam
-# Achternaam: Jouwachternaam
-# Studentnummer: 123456
+# Voornaam: Stijn
+# Achternaam: Barendse
+# Studentnummer: 591527
 
 services:
   db:
@@ -14,6 +14,8 @@ services:
       MARIADB_PASSWORD: wpwachtwoord
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - mijn-netwerk
 
   web:
     image: wordpress:latest
@@ -30,7 +32,13 @@ services:
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - wp_data:/var/www/html
+    networks:
+      - mijn-netwerk
 
 volumes:
   db_data:
   wp_data:
+
+networks:
+  mijn-netwerk:
+    driver: bridge
